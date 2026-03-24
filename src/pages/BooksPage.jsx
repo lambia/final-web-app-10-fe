@@ -1,20 +1,18 @@
+import { useEffect, useState } from "react";
 import BookCard from "../components/BookCard"
+
+import axios from 'axios';
 
 function BooksPage() {
 
-	//Un oggetto che rappresenta un finto libro, con la stessa struttura con cui mi verrebbe restituito dalla webapi
-	const fakeBook = {
-		id: 999,
-		title: "Guida Galattica",
-		author: "Nessuno",
-		abstract: "Lorem ipsum ecc...",
-		image: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg"
-	};
+	const [books, setBooks] = useState([]);
 
-	const books = [
-		fakeBook,
-		fakeBook
-	];
+	useEffect(() => {
+		axios.get("http://localhost:3000/api/books").then(response => {
+			console.log(response.data);
+			setBooks(response.data);
+		}).catch(err => console.error("Ops...", err.message));
+	}, []);
 
 	return <>
 		<h1>Elenco dei libri</h1>
