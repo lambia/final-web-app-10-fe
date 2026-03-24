@@ -1,28 +1,41 @@
 import { Link } from "react-router-dom"
 import ReviewCard from "../components/ReviewCard";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+import axios from "axios";
 
 function BookPage() {
 
-	//Un oggetto che rappresenta un finto libro, con la stessa struttura con cui mi verrebbe restituito dalla webapi
-	const fakeReview = {
-		name: "Mario Rossi",
-		vote: 4,
-		text: "lorem ipsum dolorem sit"
-	};
+	// const params = useParams();
+	// const id = params.id;
 
-	const reviews = [
-		fakeReview,
-		fakeReview
-	];
+	const { id } = useParams();
+
+	//Un oggetto che rappresenta un finto libro, con la stessa struttura con cui mi verrebbe restituito dalla webapi
+	const [book, setBook] = useState({});
+
+	useEffect(() => {
+
+		console.log("Siamo sulla pagina per bookId: ", id);
+
+		axios.get(`http://localhost:3000/api/books/${id}`).then(response => {
+			console.log(response.data);
+			setBook(response.data);
+		}).catch(err => console.error("Ops...", err.message));
+
+	}, [id]);
 
 	return <>
 		<Link to="/books">Torna alla lista libri</Link>
-		<h1>Pagina dettaglio del libro</h1>
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, alias.</p>
+		<h1>{book.title}</h1>
+		<p>{book.abstract}</p>
 
 		<div className="cards-container">
-			{reviews.map(recensione => <ReviewCard review={recensione} />)}
+			{book.reviews?.map(recensione => <ReviewCard review={recensione} />)}
 		</div>
+
+		<Link to="/books/1">Vai al mio libro preferito</Link>
 	</>
 }
 
