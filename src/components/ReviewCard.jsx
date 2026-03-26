@@ -16,7 +16,7 @@ function ReviewCard({ review }) {
 			<i className={"fa-star " + (vote >= 5 ? "fa-solid" : "fa-regular")}></i> */}
 
 			{[1, 2, 3, 4, 5].map(elemento => {
-				return <i className={"fa-star " + (vote >= elemento ? "fa-solid" : "fa-regular")}></i>
+				return <i key={elemento} className={"fa-star " + (vote >= elemento ? "fa-solid" : "fa-regular")}></i>
 			})}
 
 			{/* <ComponenteStelline voto={vote} /> */}

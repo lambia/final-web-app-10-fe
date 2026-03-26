@@ -19,7 +19,7 @@ function BooksPage() {
 		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, alias.</p>
 
 		<div className="cards-container">
-			{books.map(libro => <BookCard book={libro} />)}
+			{books.map((libro, i) => <BookCard key={i} book={libro} />)}
 		</div>
 
 	</>

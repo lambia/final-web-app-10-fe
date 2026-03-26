@@ -33,7 +33,7 @@ function BookPage() {
 		<p>{book.abstract}</p>
 
 		<div className="cards-container">
-			{book.reviews?.map(recensione => <ReviewCard review={recensione} />)}
+			{book.reviews?.map((recensione, i) => <ReviewCard key={i} review={recensione} />)}
 		</div>
 
 		<Link to="/books/1">Vai al mio libro preferito</Link>
