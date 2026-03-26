@@ -5,7 +5,7 @@ function ReviewCard({ review }) {
 
 	return <div className="card">
 		<h2>{name}</h2>
-		<h3>{vote}</h3>
+		<h3>{vote}/5</h3>
 		<p>{text}</p>
 	</div>
 }
