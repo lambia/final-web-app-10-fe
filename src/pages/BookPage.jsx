@@ -29,6 +29,7 @@ function BookPage() {
 	return <>
 		<Link to="/books">Torna alla lista libri</Link>
 		<h1>{book.title}</h1>
+		<div>Media recensioni: {book.average_review}</div>
 		<p>{book.abstract}</p>
 
 		<div className="cards-container">
