@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import ReviewCard from "../components/ReviewCard";
+import ReviewForm from "../components/ReviewForm";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
@@ -15,14 +16,17 @@ function BookPage() {
 	//Un oggetto che rappresenta un finto libro, con la stessa struttura con cui mi verrebbe restituito dalla webapi
 	const [book, setBook] = useState({});
 
-	useEffect(() => {
-
-		console.log("Siamo sulla pagina per bookId: ", id);
-
+	function getBookData() {
 		axios.get(`http://localhost:3000/api/books/${id}`).then(response => {
 			console.log(response.data);
 			setBook(response.data);
 		}).catch(err => console.error("Ops...", err.message));
+	}
+
+	useEffect(() => {
+
+		console.log("Siamo sulla pagina per bookId: ", id);
+		getBookData();
 
 	}, [id]);
 
@@ -37,6 +41,11 @@ function BookPage() {
 		</div>
 
 		<Link to="/books/1">Vai al mio libro preferito</Link>
+
+		<br />
+		<br />
+
+		<ReviewForm bookId={book.id} onNewReview={getBookData} />
 	</>
 }
 

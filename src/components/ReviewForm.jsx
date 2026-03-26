@@ -4,6 +4,7 @@ import axios from "axios";
 const ReviewForm = (props) => {
 
 	const bookId = props.bookId;
+	const reloadBookData = props.onNewReview;
 
 	const apiUrl = `http://localhost:3000/api/books/${bookId}/reviews`;
 
@@ -17,6 +18,7 @@ const ReviewForm = (props) => {
 		axios.post(apiUrl, formData).then(results => {
 			if (results.data.id) {
 				setFormData(initialValues);
+				reloadBookData();
 				console.log("ok");
 			} else {
 				console.log("ko");
